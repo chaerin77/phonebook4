@@ -53,6 +53,23 @@ public class PhoneDao {
 	}
 	
 	
+	//정보 가져오기
+	public PersonVo selectPerson(int no) {
+		System.out.println("PhoneDao.selectperson");
+		PersonVo personVo = sqlSession.selectOne("phonebook.selectPerson", no);
+		
+		return personVo;
+	}
+	
+	
+	//정보 수정
+	public int personUpdate(PersonVo personVo) {
+		System.out.println("PhoneDao.personUpdate");
+		int count = sqlSession.update("phonebook.update", personVo);
+		
+		return count;
+	}
+	
 	/*
 	
 	// 0. import java.sql.*;

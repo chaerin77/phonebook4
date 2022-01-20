@@ -34,4 +34,31 @@
 		]]>	
 	</delete>
 
+
+	<!-- id로 사람 정보 가져오기 --> <!-- 쿼리문을 완전 잘못짬 고치기전엔 수정할때의 쿼리문짰음 -->
+	<select id="selectPerson" parameterType="int" resultType="com.javaex.vo.PersonVo">
+		<![CDATA[
+			select person_id personId,
+			       name,
+    			   hp,
+    			   company 
+    		from person	   
+			where person_id = #{personId}
+		]]>
+	</select>
+	
+	
+	<!-- 정보 수정 -->
+	<update id="update" parameterType="com.javaex.vo.PersonVo" >
+		<![CDATA[
+			update person
+			set name = #{name},
+    			hp = #{hp},
+    			company = #{company}
+			where person_id = #{personId}
+		]]>
+	</update>
+	
+	
+	
 </mapper>

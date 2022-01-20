@@ -57,7 +57,7 @@ public class PhoneController {
 	
 	
 	
-	//ds에서 파라미터 값을 꺼내 정보를 담은 주소와 같은 이름을 써주면됨
+	//write   ds에서 파라미터 값을 꺼내 정보를 담은 주소와 같은 이름을 써주면됨
 	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
 	public String write(@ModelAttribute PersonVo personVo) {
 		System.out.println("PhoneController>write()");
@@ -68,37 +68,21 @@ public class PhoneController {
 		return "redirect:/phone/list";
 	}
 	
-	/*섞어쓰기 가능
-	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
-	public String write(@ModelAttribute PersonVo personVo,
-				        @RequestParam("company") String company) {
-		
-		System.out.println("PhoneController>write()");
-		
-		System.out.println(personVo);
-		System.out.println(company);
-		
-		//저장
-		return "";
-	}*/
-
 	
-	//phonebook 수정, 삭제 만들기
-
-	/*
 	//수정폼
 	@RequestMapping(value="/updateForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateForm(Model model, @RequestParam("no") int no) { //콤마!
 		
-		PersonVo pvo = phoneDao.getPerson(no);
+		PersonVo pvo = phoneDao.selectPerson(no);
 		
 		model.addAttribute("pVo", pvo);
+		System.out.println(pvo);
 		
 		return "updateForm";
 	}
-	*/
 	
-	/*
+	
+	
 	//수정
 	@RequestMapping(value="/update", method= {RequestMethod.GET, RequestMethod.POST})
 	public String update(@ModelAttribute PersonVo personVo) {
@@ -108,7 +92,7 @@ public class PhoneController {
 		
 		return "redirect:/phone/list"; //리다이렉트는 뷰 리졸브 필요없음 jsp파일 찾을필요 없으니까 
 	}
-	*/
+	
 	
 	
 	//삭제
