@@ -27,6 +27,25 @@ public class PhoneController {
 	//메소드 g/s
 	
 	//메소드 일반
+	
+	/////요청하면 list   주소창에 list 치면
+	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
+	public String list(Model model) {
+		System.out.println("PhoneController>list()");
+		
+		//다오에서 리스트를 가져온다
+		List<PersonVo> personList = phoneDao.getPersonList();
+		System.out.println(personList.toString());
+
+		//컨트롤러가 DS한테 데이터를 보내야 함.(model)
+		model.addAttribute("personList", personList);  //"" 안이 별명
+		
+		//jsp정보를 리턴한다(view)
+		return "list";
+	}
+	
+	
+	
 	// /phone/writeForm
 	@RequestMapping(value="/writeForm", method= {RequestMethod.GET, RequestMethod.POST})//주소 미리 준비
 	public String writeForm() {
@@ -35,7 +54,8 @@ public class PhoneController {
 		
 		return "writeForm";
 	}
-
+	
+	
 	
 	//ds에서 파라미터 값을 꺼내 정보를 담은 주소와 같은 이름을 써주면됨
 	@RequestMapping(value="/write", method= {RequestMethod.GET, RequestMethod.POST})
@@ -63,25 +83,9 @@ public class PhoneController {
 	}*/
 
 	
-	/////요청하면 list   주소창에 list 치면
-	@RequestMapping(value="/list", method= {RequestMethod.GET, RequestMethod.POST})
-	public String list(Model model) {
-		System.out.println("PhoneController>list()");
-		
-		//다오에서 리스트를 가져온다
-		List<PersonVo> personList = phoneDao.getPersonList();
-		System.out.println(personList.toString());
-
-		//컨트롤러가 DS한테 데이터를 보내야 함.(model)
-		model.addAttribute("personList", personList);  //"" 안이 별명
-		
-		//jsp정보를 리턴한다(view)
-		return "list";
-	}
-	
-	
 	//phonebook 수정, 삭제 만들기
 
+	/*
 	//수정폼
 	@RequestMapping(value="/updateForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateForm(Model model, @RequestParam("no") int no) { //콤마!
@@ -92,8 +96,9 @@ public class PhoneController {
 		
 		return "updateForm";
 	}
+	*/
 	
-	
+	/*
 	//수정
 	@RequestMapping(value="/update", method= {RequestMethod.GET, RequestMethod.POST})
 	public String update(@ModelAttribute PersonVo personVo) {
@@ -103,19 +108,20 @@ public class PhoneController {
 		
 		return "redirect:/phone/list"; //리다이렉트는 뷰 리졸브 필요없음 jsp파일 찾을필요 없으니까 
 	}
-	
+	*/
 	
 	
 	//삭제
-	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})
-	public String delete(@RequestParam("no") int no) {
-		System.out.println(no);
+	@RequestMapping(value="/delete", method= {RequestMethod.GET, RequestMethod.POST})//handler mapping이되도록 주소체계 갖고있어야
+	public String delete(@RequestParam("personId") int personId) {
+		System.out.println("PhoneController>delete()");
 		
-		phoneDao.personDelete(no);
+		phoneDao.personDelete(personId);
 		
 		return "redirect:/phone/list";
 	}
 	
+	/*
 	//넘겨줄 값이 아예 없는 경우
 	@RequestMapping(value="/test", method = {RequestMethod.GET, RequestMethod.POST})
 	public String test(@RequestParam(value="name") String name,
@@ -173,5 +179,5 @@ public class PhoneController {
 		System.out.println( id+"의 블로그입니다.");
 		
 		return "writeForm";
-	}
+	}*/
 }

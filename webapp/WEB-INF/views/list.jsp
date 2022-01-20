@@ -28,6 +28,10 @@
 				<td>회사(company)</td>
 				<td>${personVo.company}</td>
 			</tr>
+			<tr>
+				<td>[수정]</td>
+				<td><a href="/phonebook4/phone/delete?personId=${personVo.personId}">[삭제]</a></td>
+			</tr>
 		</table>
 		<br>
 	</c:forEach>

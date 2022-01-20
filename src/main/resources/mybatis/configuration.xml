@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/mappers/phonebook.xml" /><!-- 폰북 관련된건 여기에 쓸것 mybatis밑에 mappers밑에 phonebook.xml에-->
+		<!-- <mapper resource="mybatis/mappers/guestbook.xml" /> 이런식으로 board/ guestbook /user..늘어날수있음-->
+	</mappers>
+</configuration>

@@ -1,64 +1,30 @@
 package com.javaex.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.PersonVo;
 
 @Repository
-public class PhoneDao {
+public class PhoneDaobackup {
 	
-	@Autowired//연결
-	private SqlSession sqlSession; 
-	
-	//전체 리스트 가져오기 mybatis 스타일
-	public List<PersonVo> getPersonList(){
-		System.out.println("PhoneDao.getPersonList()");
-		
-		//phonebook.xml에 써놓은 쿼리문중 select를 써야함 phonebook.xml의 namespace,id따서 이름적어야함 --*
-		List<PersonVo> personList = sqlSession.selectList("phonebook.selectList"); //괄호안에 * 넣기
-		System.out.println(personList);
-		
-		return personList;
-	}
-	
-	
-	//전화번호 추가 저장. insert
-	public int personInsert(PersonVo personVo) {
-		System.out.println("PhoneDao.personInsert()");
-		int count = sqlSession.insert("phonebook.insert",personVo);//쿼리문의 별명 넣고 저 데이터를 얘한테 줘야함 데이터가 두개만되어도 무조건 묶어서 넘겨야함
-		//return sqlSession.insert("phonebook.insert",personVo); 이렇게 쓸수도있음
-		System.out.println(count + "건");
-		
-		return count;
-	}
-	
-	
-	//정보 삭제
-	public int personDelete(int personId) {
-		System.out.println("PhoneDao.personDelete");
-
-		int count = sqlSession.delete("phonebook.delete", personId);//phonebook.xml에 있는 delete를쓸거다. 거기있는 쿼리문. 
-		//넘겨줄 값이 있으면 이렇게(personId) 넘겨줘야함 지금은 숫자하나라서 그냥 넘긴거지만 만약 데이터두개이상이면 vo로묶어서 보내야함
-		
-		return count; 
-	}
-	
-	
-	/*
+	@Autowired
+	DataSource dataSource;
 	
 	// 0. import java.sql.*;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;  */
+	private ResultSet rs = null;
 	
 	/*
 	private String driver = "oracle.jdbc.driver.OracleDriver";
@@ -66,7 +32,6 @@ public class PhoneDao {
 	private String id = "phonedb";
 	private String pw = "phonedb";*/
 
-	/*
 	private void getConnection() {
 		try {
 			// 1. JDBC 드라이버 (Oracle) 로딩
@@ -295,6 +260,6 @@ public class PhoneDao {
 
 		 return personVo;
 
-		}*/
+		}
 	}
 
